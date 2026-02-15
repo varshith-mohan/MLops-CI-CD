@@ -1,48 +1,18 @@
 import streamlit as st
 
 # Streamlit UI
-st.title("Basic Calculator App -- ")
-st.write("Perform basic arithmetic operations on two numbers.")
+st.title("Power Calculator")
+st.write("Enter a number to calculate its square, cube, and fifth power.")
 
-
-# User inputs
-num1 = st.number_input("Enter first number - ", value=0.0, key="num1")
-num2 = st.number_input("Enter second number - ", value=0.0, key="num2")
-
-# Operation selection
-operation = st.selectbox(
-    "Choose an operation",
-    ("Addition", "Subtraction", "Multiplication", "Division"),
-    key="operation"
-)
-
-
-
-# Calculation
-if operation == "Addition":
-    result = num1 + num2
-    st.write(f"Result: {num1} + {num2} = {result}")
-
-elif operation == "Subtraction":
-    result = num1 - num2
-    st.write(f"Result: {num1} - {num2} = {result}")
-
-elif operation == "Multiplication":
-    result = num1 * num2
-    st.write(f"Result: {num1} × {num2} = {result}")
-
-elif operation == "Division":
-    if num2 == 0:
-        st.error("Division by zero is not allowed.")
-    else:
-        result = num1 / num2
-        st.write(f"Result: {num1} ÷ {num2} = {result}")
-
+# Get user input
+n = st.number_input("Enter an integer", value=1, step=1)
 
 # Calculate results
-square1 = num1 ** 2
-square2 = num2 ** 2
+square = n ** 2
+cube = n ** 3
+fifth_power = n ** 5
 
 # Display results
-st.write(f"The square of {num1} is: {square1}")
-st.write(f"The square of {num2} is: {square2}")
+st.write(f"The square of {n} is: {square}")
+st.write(f"The cube of {n} is: {cube}")
+st.write(f"The fifth power of {n} is: {fifth_power}")

@@ -1,76 +1,33 @@
 import pytest
-from streamlit.testing.v1 import AppTest
 
+# Function to test square
+def square(n):
+    return n ** 2
 
-def get_rendered_text(app):
-    """Helper to extract visible text from Streamlit app"""
-    return [t.value for t in app.text]
+# Function to test cube
+def cube(n):
+    return n ** 3
 
+# Function to test fifth power
+def fifth_power(n):
+    return n ** 5
 
-@pytest.fixture
-def app():
-    at = AppTest.from_file("web-app.py")
-    at.run()
-    return at
+# Testing the square function
+def test_square():
+    assert square(2) == 4, "Test Failed: Square of 2 should be 4"
+    assert square(3) == 9, "Test Failed: Square of 3 should be 9"
 
+# Testing the cube function
+def test_cube():
+    assert cube(2) == 8, "Test Failed: Cube of 2 should be 8"
+    assert cube(3) == 27, "Test Failed: Cube of 3 should be 27"
 
-def test_addition(app):
-    app.number_input(key="num1").set_value(5)
-    app.number_input(key="num2").set_value(3)
-    app.selectbox(key="operation").set_value("Addition")
-    app.run()
+# Testing the fifth power function
+def test_fifth_power():
+    assert fifth_power(2) == 32, "Test Failed: Fifth power of 2 should be 32"
+    assert fifth_power(3) == 243, "Test Failed: Fifth power of 3 should be 243"
 
-    text = get_rendered_text(app)
-    assert "Result: 5.0 + 3.0 = 8.0" in text
-    assert "The square of 5.0 is: 25.0" in text
-    assert "The square of 3.0 is: 9.0" in text
-
-
-def test_subtraction(app):
-    app.number_input(key="num1").set_value(10)
-    app.number_input(key="num2").set_value(4)
-    app.selectbox(key="operation").set_value("Subtraction")
-    app.run()
-
-    text = get_rendered_text(app)
-    assert "Result: 10.0 - 4.0 = 6.0" in text
-
-
-def test_multiplication(app):
-    app.number_input(key="num1").set_value(6)
-    app.number_input(key="num2").set_value(7)
-    app.selectbox(key="operation").set_value("Multiplication")
-    app.run()
-
-    text = get_rendered_text(app)
-    assert "Result: 6.0 × 7.0 = 42.0" in text
-
-
-def test_division(app):
-    app.number_input(key="num1").set_value(20)
-    app.number_input(key="num2").set_value(5)
-    app.selectbox(key="operation").set_value("Division")
-    app.run()
-
-    text = get_rendered_text(app)
-    assert "Result: 20.0 ÷ 5.0 = 4.0" in text
-
-
-def test_division_by_zero(app):
-    app.number_input(key="num1").set_value(10)
-    app.number_input(key="num2").set_value(0)
-    app.selectbox(key="operation").set_value("Division")
-    app.run()
-
-    errors = [e.value for e in app.error]
-    assert "Division by zero is not allowed." in errors
-
-
-def test_square_calculation(app):
-    app.number_input(key="num1").set_value(4)
-    app.number_input(key="num2").set_value(2)
-    app.run()
-
-    text = get_rendered_text(app)
-    assert "The square of 4.0 is: 16.0" in text
-    assert "The square of 2.0 is: 4.0" in text
+# Test for invalid input
+def test_invalid_input():
+    with pytest.raises(TypeError):
+        square("string")
