@@ -4,8 +4,9 @@ from streamlit.testing.v1 import AppTest
 
 @pytest.fixture
 def app():
-    """Load the Streamlit app"""
-    return AppTest.from_file("web-app.py")
+    at = AppTest.from_file("web-app.py")
+    at.run()   # 🔑 REQUIRED to build widget tree
+    return at
 
 
 def test_addition(app):
