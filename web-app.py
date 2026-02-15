@@ -4,15 +4,19 @@ import streamlit as st
 st.title("Basic Calculator App -- ")
 st.write("Perform basic arithmetic operations on two numbers.")
 
+
 # User inputs
-num1 = st.number_input("Enter first number - ", value=0.0)
-num2 = st.number_input("Enter second number - ", value=0.0)
+num1 = st.number_input("Enter first number - ", value=0.0, key="num1")
+num2 = st.number_input("Enter second number - ", value=0.0, key="num2")
 
 # Operation selection
 operation = st.selectbox(
     "Choose an operation",
-    ("Addition", "Subtraction", "Multiplication", "Division")
+    ("Addition", "Subtraction", "Multiplication", "Division"),
+    key="operation"
 )
+
+
 
 # Calculation
 if operation == "Addition":
